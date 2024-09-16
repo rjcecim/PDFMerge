@@ -67,8 +67,8 @@ main {
 /* Lista de miniaturas */
 .page-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Definindo colunas com largura mínima */
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Use 'auto-fill' para preencher o espaço disponível */
+    gap: 10px; /* Mantém um pequeno espaço entre as miniaturas */
     margin: 20px 0;
     padding: 10px;
     width: 100%;
