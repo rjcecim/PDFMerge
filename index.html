@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unir PDFs Online</title>
+
+    <!-- Importando as fontes Poppins e Roboto do Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.7.107/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+    <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Unir PDFs Online</h1>
+    </header>
+
+    <main>
+        <section class="upload-section" id="upload-section">
+            <input type="file" id="pdf-upload" accept="application/pdf" multiple>
+            <label for="pdf-upload">Clique ou arraste e solte os PDFs aqui</label>
+        </section>
+
+        <section id="page-list" class="page-list" style="display: none;"></section>
+
+        <section class="actions">
+            <button id="merge-btn">Unir PDFs</button>
+            <a id="download-link" style="display: none;" download="merged.pdf">Baixar PDF Unificado</a>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

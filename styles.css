@@ -1,0 +1,212 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Fonte e cores globais */
+html, body {
+    height: 100%;
+    font-family: 'Roboto', sans-serif; /* Fonte principal: Roboto */
+    background-color: #f7f9fc; /* Fundo claro suave */
+    color: #333; /* Cor de texto primária */
+}
+
+/* Estilo do cabeçalho */
+header {
+    background-color: #1e3a8a; /* Azul escuro elegante */
+    color: #fff; /* Texto branco */
+    padding: 20px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif; /* Cabeçalho usa Poppins */
+    font-size: 2.5em; /* Tamanho grande do título */
+    font-weight: 600; /* Negrito */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra no cabeçalho */
+}
+
+/* Estilos principais */
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza horizontalmente */
+    padding: 40px;
+}
+
+/* Área de upload */
+.upload-section {
+    border: 2px dashed #a3bffa; /* Borda tracejada em azul claro */
+    padding: 60px;
+    text-align: center;
+    border-radius: 12px; /* Borda mais arredondada */
+    margin: 20px;
+    background-color: #fff;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transição suave */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Sombra suave */
+    cursor: pointer;
+}
+
+.upload-section.dragover {
+    background-color: #e0e7ff; /* Fundo muda para azul claro ao arrastar arquivos */
+    transform: scale(1.05); /* Leve zoom ao arrastar */
+}
+
+/* Oculta o input de arquivo */
+.upload-section input {
+    display: none;
+}
+
+/* Texto do label */
+.upload-section label {
+    font-family: 'Poppins', sans-serif; /* Usando Poppins para o label */
+    font-size: 18px;
+    color: #1e3a8a; /* Texto azul escuro */
+    font-weight: 500; /* Peso intermediário */
+}
+
+/* Lista de miniaturas */
+.page-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Definindo colunas com largura mínima */
+    gap: 20px;
+    margin: 20px 0;
+    padding: 10px;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    overflow-y: auto; /* Permite rolagem para evitar overflow */
+    max-height: 60vh; /* Define uma altura máxima para a lista de miniaturas */
+}
+
+/* Estilo das miniaturas com proporção de folha A4 */
+.page-item {
+    position: relative;
+    width: 150px; /* Largura fixa */
+    height: calc(150px * 1.414); /* Altura calculada para manter proporção de folha A4 */
+    border-radius: 8px;
+    background-color: #f1f5f9;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 10px; /* Adiciona espaçamento para o texto */
+}
+
+.page-item:hover {
+    transform: translateY(-5px);
+}
+
+.page-item img {
+    width: 100%; /* Largura total da imagem */
+    height: 80%; /* Ocupa 80% da altura para garantir espaço para o texto */
+    object-fit: contain; /* Mantém as proporções da imagem */
+    border-radius: 8px;
+}
+
+/* Informações das páginas */
+.page-info {
+    margin-top: 5px;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif; /* Usando Roboto para as infos */
+    text-align: center;
+    color: #555;
+    padding: 0 5px;
+    height: 20%; /* Altura definida para garantir que o texto não seja coberto */
+    overflow: hidden; /* Impede que o texto ultrapasse a área da div */
+    word-wrap: break-word; /* Quebra de linha para evitar overflow */
+}
+
+/* Botão de remover página */
+.remove-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ff6b6b; /* Vermelho suave */
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: background-color 0.2s ease;
+}
+
+.remove-btn:hover {
+    background-color: #ff5252; /* Muda de cor ao passar o mouse */
+}
+
+/* Seção de ações */
+.actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+}
+
+/* Estilo do botão de mesclar PDFs */
+#merge-btn {
+    padding: 15px 40px;
+    background: linear-gradient(135deg, #1e40af, #3b82f6); /* Gradiente azul */
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-bottom: 20px;
+}
+
+#merge-btn:hover {
+    background: linear-gradient(135deg, #1d4ed8, #60a5fa); /* Gradiente mais claro no hover */
+}
+
+/* Link para download */
+#download-link {
+    font-size: 18px;
+    color: #1e3a8a; /* Azul escuro */
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    margin-top: 10px;
+}
+
+/* Responsividade para tablets */
+@media (max-width: 768px) {
+    .upload-section {
+        padding: 40px;
+        margin: 10px;
+    }
+
+    .page-list {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Ajusta o tamanho das colunas */
+    }
+
+    #merge-btn {
+        padding: 10px 30px;
+    }
+}
+
+/* Responsividade para dispositivos móveis */
+@media (max-width: 480px) {
+    .upload-section {
+        padding: 30px;
+    }
+
+    .page-list {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Reduz o tamanho das colunas */
+    }
+
+    .page-item img {
+        height: 150px;
+    }
+
+    #merge-btn {
+        padding: 10px 20px;
+    }
+
+    #download-link {
+        font-size: 16px;
+    }
+}
