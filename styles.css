@@ -9,20 +9,35 @@
 html, body {
     height: 100%;
     font-family: 'Roboto', sans-serif; /* Fonte principal: Roboto */
-    background-color: #f7f9fc; /* Fundo claro suave */
-    color: #333; /* Cor de texto primária */
+    background-color: #f0f0f0; /* Cor de fundo clara */
+    color: #333; /* Cor de texto padrão */
 }
 
 /* Estilo do cabeçalho */
 header {
-    background-color: #1e3a8a; /* Azul escuro elegante */
+    background: linear-gradient(135deg, rgba(0, 51, 153, 0.85), rgba(209, 44, 47, 0.85)); /* Azul e Vermelho do TCE com opacidade */
     color: #fff; /* Texto branco */
     padding: 20px;
-    text-align: center;
-    font-family: 'Poppins', sans-serif; /* Cabeçalho usa Poppins */
-    font-size: 2.5em; /* Tamanho grande do título */
-    font-weight: 600; /* Negrito */
+    display: flex;
+    justify-content: center; /* Centraliza o conteúdo horizontalmente */
+    align-items: center; /* Alinha o conteúdo verticalmente */
+    position: relative; /* Para posicionamento do logo no extremo esquerdo */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra no cabeçalho */
+}
+
+/* Logo grande à esquerda */
+.logo {
+    position: absolute; /* Posiciona o logo no extremo esquerdo */
+    left: 20px; /* Distância da borda esquerda */
+    height: 200px; /* Aumenta o tamanho do logo */
+}
+
+/* Centraliza o título "Unir PDFs Online" */
+header h1 {
+    font-size: 2.5em; /* Tamanho do texto */
+    font-family: 'Poppins', sans-serif; /* Fonte Poppins */
+    font-weight: 600;
+    text-align: center;
 }
 
 /* Estilos principais */
@@ -35,20 +50,20 @@ main {
 
 /* Área de upload */
 .upload-section {
-    border: 2px dashed #a3bffa; /* Borda tracejada em azul claro */
+    border: 2px dashed #d12c2f; /* Borda tracejada em vermelho que combina com o logo */
     padding: 60px;
     text-align: center;
-    border-radius: 12px; /* Borda mais arredondada */
+    border-radius: 12px;
     margin: 20px;
     background-color: #fff;
-    transition: background-color 0.3s ease, transform 0.3s ease; /* Transição suave */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Sombra suave */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     cursor: pointer;
 }
 
 .upload-section.dragover {
-    background-color: #e0e7ff; /* Fundo muda para azul claro ao arrastar arquivos */
-    transform: scale(1.05); /* Leve zoom ao arrastar */
+    background-color: #003399; /* Fundo muda para azul escuro ao arrastar arquivos */
+    transform: scale(1.05);
 }
 
 /* Oculta o input de arquivo */
@@ -58,32 +73,32 @@ main {
 
 /* Texto do label */
 .upload-section label {
-    font-family: 'Poppins', sans-serif; /* Usando Poppins para o label */
+    font-family: 'Poppins', sans-serif;
     font-size: 18px;
-    color: #1e3a8a; /* Texto azul escuro */
-    font-weight: 500; /* Peso intermediário */
+    color: #003399; /* Texto azul escuro */
+    font-weight: 500;
 }
 
 /* Lista de miniaturas */
 .page-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Use 'auto-fill' para preencher o espaço disponível */
-    gap: 10px; /* Mantém um pequeno espaço entre as miniaturas */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
     margin: 20px 0;
     padding: 10px;
     width: 100%;
     background-color: #fff;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    overflow-y: auto; /* Permite rolagem para evitar overflow */
-    max-height: 60vh; /* Define uma altura máxima para a lista de miniaturas */
+    overflow-y: auto;
+    max-height: 60vh;
 }
 
 /* Estilo das miniaturas com proporção de folha A4 */
 .page-item {
     position: relative;
-    width: 150px; /* Largura fixa */
-    height: calc(150px * 1.414); /* Altura calculada para manter proporção de folha A4 */
+    width: 150px;
+    height: calc(150px * 1.414);
     border-radius: 8px;
     background-color: #f1f5f9;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
@@ -91,7 +106,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-bottom: 10px; /* Adiciona espaçamento para o texto */
+    padding-bottom: 10px;
 }
 
 .page-item:hover {
@@ -99,9 +114,9 @@ main {
 }
 
 .page-item img {
-    width: 100%; /* Largura total da imagem */
-    height: 80%; /* Ocupa 80% da altura para garantir espaço para o texto */
-    object-fit: contain; /* Mantém as proporções da imagem */
+    width: 100%;
+    height: 80%;
+    object-fit: contain;
     border-radius: 8px;
 }
 
@@ -109,13 +124,13 @@ main {
 .page-info {
     margin-top: 5px;
     font-size: 14px;
-    font-family: 'Roboto', sans-serif; /* Usando Roboto para as infos */
+    font-family: 'Roboto', sans-serif;
     text-align: center;
     color: #555;
     padding: 0 5px;
-    height: 20%; /* Altura definida para garantir que o texto não seja coberto */
-    overflow: hidden; /* Impede que o texto ultrapasse a área da div */
-    word-wrap: break-word; /* Quebra de linha para evitar overflow */
+    height: 20%;
+    overflow: hidden;
+    word-wrap: break-word;
 }
 
 /* Botão de remover página */
@@ -123,7 +138,7 @@ main {
     position: absolute;
     top: 10px;
     right: 10px;
-    background-color: #ff6b6b; /* Vermelho suave */
+    background-color: #d12c2f; /* Vermelho TCE */
     color: #fff;
     border: none;
     border-radius: 50%;
@@ -133,7 +148,7 @@ main {
 }
 
 .remove-btn:hover {
-    background-color: #ff5252; /* Muda de cor ao passar o mouse */
+    background-color: #a32025; /* Vermelho mais forte no hover */
 }
 
 /* Seção de ações */
@@ -147,7 +162,7 @@ main {
 /* Estilo do botão de mesclar PDFs */
 #merge-btn {
     padding: 15px 40px;
-    background: linear-gradient(135deg, #1e40af, #3b82f6); /* Gradiente azul */
+    background: linear-gradient(135deg, #003399, #d12c2f); /* Gradiente azul e vermelho */
     color: #fff;
     border: none;
     border-radius: 8px;
@@ -160,13 +175,13 @@ main {
 }
 
 #merge-btn:hover {
-    background: linear-gradient(135deg, #1d4ed8, #60a5fa); /* Gradiente mais claro no hover */
+    background: linear-gradient(135deg, #00247d, #a32025); /* Gradiente mais escuro no hover */
 }
 
 /* Link para download */
 #download-link {
     font-size: 18px;
-    color: #1e3a8a; /* Azul escuro */
+    color: #003399; /* Azul escuro */
     text-decoration: none;
     font-family: 'Poppins', sans-serif;
     margin-top: 10px;
@@ -180,7 +195,7 @@ main {
     }
 
     .page-list {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Ajusta o tamanho das colunas */
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     }
 
     #merge-btn {
@@ -195,7 +210,7 @@ main {
     }
 
     .page-list {
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Reduz o tamanho das colunas */
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     }
 
     .page-item img {
