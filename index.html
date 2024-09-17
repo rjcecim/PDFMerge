@@ -1,38 +1,54 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unir PDFs Online</title>
+    <meta charset="UTF-8"> <!-- Define a codificação de caracteres como UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Define a escala inicial da viewport para dispositivos móveis -->
+    <title>Unir PDFs Online</title> <!-- Título da página -->
 
     <!-- Importando as fontes Poppins e Roboto do Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 
+    <!-- Vincula o arquivo CSS externo para aplicar estilos -->
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.7.107/pdf.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
-    <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+
+    <!-- Importa as bibliotecas locais -->
+    <!-- Sortable.js -->
+    <script src="./libs/Sortable.min.js"></script>
+
+    <!-- PDF-Lib -->
+    <script src="./libs/pdf-lib.min.js"></script>
 </head>
 <body>
-    <header>
-        <img src="logo-tce-pa.png" alt="Logo TCE-PA" class="logo">
-        <h1>Unir PDFs Online</h1>
+    <header> <!-- Cabeçalho da página com logo e título -->
+        <img src="logo-tce-pa.png" alt="Logo TCE-PA" class="logo"> <!-- Logo do TCE-PA -->
+        <h1>Unir PDFs Online</h1> <!-- Título principal da página -->
     </header>
 
     <main>
+        <!-- Seção de upload de arquivos PDF -->
         <section class="upload-section" id="upload-section">
-            <input type="file" id="pdf-upload" accept="application/pdf" multiple>
-            <label for="pdf-upload">Clique ou arraste e solte os PDFs aqui</label>
+            <input type="file" id="pdf-upload" accept="application/pdf" multiple> <!-- Input para selecionar arquivos PDF -->
+            <label for="pdf-upload">Clique ou arraste e solte os PDFs aqui</label> <!-- Texto instruindo como enviar os arquivos -->
         </section>
 
+        <!-- Seção para exibir a lista de páginas dos PDFs, inicialmente oculta -->
         <section id="page-list" class="page-list" style="display: none;"></section>
 
+        <!-- Seção com botões de ação -->
         <section class="actions">
-            <button id="merge-btn">Unir PDFs</button>
-            <a id="download-link" style="display: none;" download="merged.pdf">Baixar PDF Unificado</a>
+            <button id="merge-btn">Unir PDFs</button> <!-- Botão para unir os PDFs -->
+            <a id="download-link" style="display: none;" download="merged.pdf">Baixar PDF Unificado</a> <!-- Link para baixar o PDF mesclado -->
         </section>
     </main>
 
-    <script src="script.js"></script>
+    <!-- Modal para exibir a página em tamanho maior -->
+    <div id="modal" class="modal">
+        <span class="close-btn">&times;</span>
+        <canvas id="modal-canvas"></canvas>
+    </div>
+
+    <!-- Vincula o arquivo JavaScript externo para interatividade -->
+    <!-- Definimos o script como um módulo para usar imports -->
+    <script type="module" src="script.js"></script>
 </body>
 </html>
