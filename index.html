@@ -1,54 +1,53 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8"> <!-- Define character encoding as UTF-8 -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Sets the viewport for mobile devices -->
-    <title>Unir PDFs Online</title> <!-- Page title -->
+    <meta charset="UTF-8"> <!-- Define a codificação de caracteres como UTF-8 para suportar caracteres especiais -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configura a viewport para dispositivos móveis, responsividade -->
+    <title>Unir PDFs Online</title> <!-- Título da página exibido na aba do navegador -->
 
-    <!-- Importing Poppins and Roboto fonts from Google Fonts -->
+    <!-- Importa as fontes Poppins e Roboto do Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 
-    <!-- Link to external CSS file for styles -->
+    <!-- Link para o arquivo CSS externo, onde as regras de estilo da página estão definidas -->
     <link rel="stylesheet" href="styles.css">
 
-    <!-- Importing local libraries -->
-    <!-- Sortable.js -->
+    <!-- Importação de bibliotecas locais -->
+    <!-- Sortable.js: Biblioteca para implementar funcionalidade de arrastar e soltar -->
     <script src="./libs/Sortable.min.js"></script>
 
-    <!-- PDF-Lib -->
+    <!-- PDF-Lib: Biblioteca para manipulação de arquivos PDF -->
     <script src="./libs/pdf-lib.min.js"></script>
 </head>
 <body>
-    <header> <!-- Page header with logo and title -->
-        <img src="logo-tce-pa.png" alt="Logo TCE-PA" class="logo"> <!-- TCE-PA Logo -->
-        <h1>Unir PDFs Online</h1> <!-- Main page title -->
+    <header> <!-- Cabeçalho da página contendo logo e título -->
+        <img src="logo-tce-pa.png" alt="Logo TCE-PA" class="logo"> <!-- Imagem do logo TCE-PA -->
+        <h1>Unir PDFs Online</h1> <!-- Título principal da página -->
     </header>
 
     <main>
-        <!-- PDF file upload section -->
+        <!-- Seção para upload de arquivos PDF -->
         <section class="upload-section" id="upload-section">
-            <input type="file" id="pdf-upload" accept="application/pdf" multiple> <!-- File input for selecting PDFs -->
-            <label for="pdf-upload">Click or drag and drop PDFs here</label> <!-- Instructions for file upload -->
+            <input type="file" id="pdf-upload" accept="application/pdf" multiple> <!-- Campo para selecionar vários arquivos PDF -->
+            <label for="pdf-upload">Click or drag and drop PDFs here</label> <!-- Texto de instrução para o usuário -->
         </section>
 
-        <!-- Section to display the list of PDF pages, initially hidden -->
+        <!-- Seção para exibir a lista de páginas dos PDFs, inicialmente oculta -->
         <section id="page-list" class="page-list" style="display: none;"></section>
 
-        <!-- Section with action buttons -->
+        <!-- Seção com botões de ação -->
         <section class="actions">
-            <button id="merge-btn">Merge PDFs</button> <!-- Button to merge PDFs -->
-            <a id="download-link" style="display: none;" download="merged.pdf">Download Merged PDF</a> <!-- Link to download the merged PDF -->
+            <button id="merge-btn">Merge PDFs</button> <!-- Botão para mesclar PDFs -->
+            <a id="download-link" style="display: none;" download="merged.pdf">Download Merged PDF</a> <!-- Link para baixar o PDF mesclado -->
         </section>
     </main>
 
-    <!-- Modal to display the enlarged PDF page -->
+    <!-- Modal para exibir uma página ampliada do PDF -->
     <div id="modal" class="modal">
-        <span class="close-btn">&times;</span>
-        <canvas id="modal-canvas"></canvas>
+        <span class="close-btn">&times;</span> <!-- Botão para fechar o modal -->
+        <canvas id="modal-canvas"></canvas> <!-- Canvas para renderizar a página do PDF no modal -->
     </div>
 
-    <!-- Link to external JavaScript file for interactivity -->
-    <!-- We define the script as a module to use imports -->
+    <!-- Link para o arquivo JavaScript externo, responsável pela interatividade -->
     <script type="module" src="script.js"></script>
 </body>
 </html>

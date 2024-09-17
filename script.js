@@ -1,10 +1,10 @@
-// Import pdf.js from the local file
+// Importa a biblioteca pdf.js do arquivo local
 import * as pdfjsLib from './libs/pdf.min.mjs';
 
-// Set the worker path
+// Define o caminho para o worker (trabalhador) do pdf.js
 pdfjsLib.GlobalWorkerOptions.workerSrc = './libs/pdf.worker.min.mjs';
 
-// Select HTML elements for interactivity
+// Seleciona os elementos HTML para interação
 const pdfUpload = document.getElementById('pdf-upload');
 const uploadSection = document.getElementById('upload-section');
 const pageList = document.getElementById('page-list');
@@ -15,49 +15,49 @@ const modal = document.getElementById('modal');
 const modalCanvas = document.getElementById('modal-canvas');
 const closeBtn = document.querySelector('.close-btn');
 
-let pagesArray = []; // Array to store PDF pages
-const pdfFiles = new Map(); // Map to store loaded PDFs
-let pageIdCounter = 0; // Counter for unique page IDs
-let fileIdCounter = 1; // Counter for unique file IDs
+let pagesArray = []; // Array para armazenar as páginas dos PDFs
+const pdfFiles = new Map(); // Mapa para armazenar os PDFs carregados
+let pageIdCounter = 0; // Contador para IDs únicos de páginas
+let fileIdCounter = 1; // Contador para IDs únicos de arquivos
 
-// Initialize sortable functionality using Sortable.js
+// Inicializa a funcionalidade de arrastar e soltar usando Sortable.js
 const sortable = new Sortable(pageList, {
     animation: 150,
-    ghostClass: 'sortable-ghost',
+    ghostClass: 'sortable-ghost', // Classe CSS aplicada ao item durante a movimentação
     scroll: true,
-    scrollSensitivity: 100,
-    scrollSpeed: 10,
-    bubbleScroll: true,
+    scrollSensitivity: 100, // Sensibilidade da rolagem
+    scrollSpeed: 10, // Velocidade da rolagem
+    bubbleScroll: true, // Permite rolagem em elementos pai
     onEnd: function (evt) {
-        // Update the order of pages in the array when the user drops an item
+        // Atualiza a ordem das páginas no array quando o usuário solta um item
         const newOrder = Array.from(pageList.children).map(child => parseInt(child.getAttribute('data-id')));
         const newPagesArray = newOrder.map(id => pagesArray.find(page => page.id === id)).filter(page => page !== undefined);
         pagesArray = newPagesArray;
     }
 });
 
-// Function to update the list of page thumbnails
+// Função para atualizar a lista de miniaturas das páginas
 function updatePageList() {
-    pageList.innerHTML = ''; // Clear the list before updating
+    pageList.innerHTML = ''; // Limpa a lista antes de atualizar
     pagesArray.forEach((page) => {
         const div = document.createElement('div');
         div.classList.add('page-item');
         div.setAttribute('data-id', page.id);
-        div.setAttribute('draggable', 'false'); // Prevents the thumbnail from being individually dragged
+        div.setAttribute('draggable', 'false'); // Evita que a miniatura seja arrastada individualmente
         div.innerHTML = `
             <img src="${page.thumbnail}" alt="Page ${page.pageNumber}" draggable="false">
             <div class="page-info">${page.fileDisplayName} - Page ${page.pageNumber}</div>
             <button class="remove-btn" onclick="removePage(${page.id})">&times;</button>
         `;
-        pageList.appendChild(div); // Add the thumbnail to the list
+        pageList.appendChild(div); // Adiciona a miniatura à lista
 
-        // Add double-click event to open the modal
+        // Adiciona evento de duplo clique para abrir o modal
         div.addEventListener('dblclick', () => {
             openModal(page);
         });
     });
 
-    // Show or hide the list depending on whether there are pages in the array
+    // Mostra ou oculta a lista dependendo se há páginas no array
     if (pagesArray.length > 0) {
         pageList.style.display = 'grid';
     } else {
@@ -65,19 +65,19 @@ function updatePageList() {
     }
 }
 
-// Function to open the modal and render the selected page
+// Função para abrir o modal e renderizar a página selecionada
 async function openModal(page) {
-    modal.classList.add('open');
+    modal.classList.add('open'); // Exibe o modal
 
     const context = modalCanvas.getContext('2d');
 
-    // Clear the canvas
+    // Limpa o canvas
     context.clearRect(0, 0, modalCanvas.width, modalCanvas.height);
 
     try {
         let fileData = pdfFiles.get(page.fileId);
 
-        // Load the pdf.js document if not already loaded
+        // Carrega o documento pdf.js se ainda não estiver carregado
         if (!fileData.pdfjsDoc) {
             fileData.pdfjsDoc = await pdfjsLib.getDocument({ data: fileData.pdfBuffer.slice(0) }).promise;
         }
@@ -85,7 +85,7 @@ async function openModal(page) {
         const pdfPage = await fileData.pdfjsDoc.getPage(page.pageNumber);
         const viewport = pdfPage.getViewport({ scale: 1 });
 
-        // Calculate scale to fit the page in the modal
+        // Calcula a escala para ajustar a página no modal
         const scale = Math.min(
             (modalCanvas.parentElement.clientWidth - 40) / viewport.width,
             (modalCanvas.parentElement.clientHeight - 40) / viewport.height
@@ -100,95 +100,95 @@ async function openModal(page) {
             viewport: scaledViewport
         };
 
-        await pdfPage.render(renderContext).promise;
+        await pdfPage.render(renderContext).promise; // Renderiza a página no canvas
     } catch (error) {
-        console.error('Error rendering page in modal:', error);
-        alert(`Error rendering the page. See console for details.`);
+        console.error('Erro ao renderizar a página no modal:', error);
+        alert(`Erro ao renderizar a página. Veja o console para detalhes.`);
     }
 }
 
-// Event to close the modal when clicking the close button
+// Evento para fechar o modal ao clicar no botão de fechar
 closeBtn.addEventListener('click', () => {
     modal.classList.remove('open');
 });
 
-// Close the modal when clicking outside the content
+// Fecha o modal ao clicar fora do conteúdo
 modal.addEventListener('click', (e) => {
     if (e.target === modal) {
         modal.classList.remove('open');
     }
 });
 
-// Function to remove a page from the array
+// Função para remover uma página do array
 function removePage(id) {
-    pagesArray = pagesArray.filter(page => page.id !== id); // Remove the page with the corresponding ID
-    updatePageList(); // Update the list after removal
+    pagesArray = pagesArray.filter(page => page.id !== id); // Remove a página com o ID correspondente
+    updatePageList(); // Atualiza a lista após a remoção
 }
 
-// Make the removePage function globally accessible
+// Torna a função removePage acessível globalmente
 window.removePage = removePage;
 
-// Event to handle file uploads via file input
+// Evento para lidar com o upload de arquivos via input
 pdfUpload.addEventListener('change', (e) => {
-    const files = Array.from(e.target.files); // Convert uploaded files to an array
+    const files = Array.from(e.target.files); // Converte os arquivos carregados em um array
     files.forEach(file => {
         if (file.type === 'application/pdf') {
-            processPDF(file); // Process the PDF file
+            processPDF(file); // Processa o arquivo PDF
         }
     });
-    pdfUpload.value = ''; // Clear the input after upload
+    pdfUpload.value = ''; // Limpa o input após o upload
 });
 
-// Event to handle dragging files over the upload area
+// Evento para lidar com o arraste de arquivos sobre a área de upload
 uploadSection.addEventListener('dragover', (e) => {
-    e.preventDefault(); // Prevent default browser behavior
-    uploadSection.classList.add('dragover'); // Add styling class when dragging
+    e.preventDefault(); // Previne o comportamento padrão do navegador
+    uploadSection.classList.add('dragover'); // Adiciona a classe de estilo ao arrastar
 });
 
-// Event to remove dragover style when the mouse leaves the upload area
+// Evento para remover o estilo de arraste quando o mouse sai da área de upload
 uploadSection.addEventListener('dragleave', () => {
-    uploadSection.classList.remove('dragover'); // Remove styling class
+    uploadSection.classList.remove('dragover'); // Remove a classe de estilo
 });
 
-// Event to handle dropping files in the upload area
+// Evento para lidar com o drop de arquivos na área de upload
 uploadSection.addEventListener('drop', (e) => {
-    e.preventDefault(); // Prevent default browser behavior
-    uploadSection.classList.remove('dragover'); // Remove dragover style
-    const files = Array.from(e.dataTransfer.files); // Get the dropped files
+    e.preventDefault(); // Previne o comportamento padrão do navegador
+    uploadSection.classList.remove('dragover'); // Remove o estilo de arraste
+    const files = Array.from(e.dataTransfer.files); // Obtém os arquivos soltos
     files.forEach(file => {
         if (file.type === 'application/pdf') {
-            processPDF(file); // Process the PDF file
+            processPDF(file); // Processa o arquivo PDF
         }
     });
 });
 
-// Function to process and display the pages of the PDF
+// Função para processar e exibir as páginas do PDF
 async function processPDF(file) {
     try {
-        const arrayBuffer = await file.arrayBuffer();
-        const bufferForPDFJS = arrayBuffer.slice(0);
-        const bufferForPDFLib = arrayBuffer.slice(0);
+        const arrayBuffer = await file.arrayBuffer(); // Carrega o conteúdo do arquivo PDF
+        const bufferForPDFJS = arrayBuffer.slice(0); // Cria um buffer para pdf.js
+        const bufferForPDFLib = arrayBuffer.slice(0); // Cria um buffer para PDFLib
 
-        // Store the buffer in the pdfFiles map
+        // Armazena o buffer no mapa pdfFiles
         const fileId = pageIdCounter++;
-        const fileDisplayName = `File ${fileIdCounter++}`; // Assign a short name to the file
+        const fileDisplayName = `File ${fileIdCounter++}`; // Atribui um nome curto ao arquivo
         pdfFiles.set(fileId, {
             fileName: file.name,
-            fileDisplayName: fileDisplayName, // Store the short name
+            fileDisplayName: fileDisplayName, // Armazena o nome curto
             pdfBuffer: bufferForPDFLib,
             numPages: 0,
-            pdfDoc: null, // For PDFLib document
-            pdfjsDoc: null // For pdf.js document
+            pdfDoc: null, // Para documento PDFLib
+            pdfjsDoc: null // Para documento pdf.js
         });
 
         const loadingTask = pdfjsLib.getDocument({ data: bufferForPDFJS });
         const pdf = await loadingTask.promise;
         const numPages = pdf.numPages;
 
-        // Update the number of pages
+        // Atualiza o número de páginas
         pdfFiles.get(fileId).numPages = numPages;
 
-        // Iterate over each page of the PDF
+        // Itera sobre cada página do PDF
         for (let pageNum = 1; pageNum <= numPages; pageNum++) {
             try {
                 const page = await pdf.getPage(pageNum);
@@ -196,7 +196,7 @@ async function processPDF(file) {
                 const canvas = document.createElement('canvas');
                 const context = canvas.getContext('2d');
 
-                const scale = 0.2; // Set thumbnail scale
+                const scale = 0.2; // Define a escala da miniatura
                 const scaledViewport = page.getViewport({ scale: scale });
                 canvas.height = scaledViewport.height;
                 canvas.width = scaledViewport.width;
@@ -206,71 +206,71 @@ async function processPDF(file) {
                     viewport: scaledViewport
                 };
 
-                await page.render(renderContext).promise;
+                await page.render(renderContext).promise; // Renderiza a página no canvas
 
-                const thumbnail = canvas.toDataURL();
+                const thumbnail = canvas.toDataURL(); // Gera a miniatura como uma URL de dados
 
-                // Add the processed page to the pages array
+                // Adiciona a página processada ao array de páginas
                 pagesArray.push({
                     id: pageIdCounter++,
                     fileId: fileId,
                     fileName: file.name,
-                    fileDisplayName: fileDisplayName, // Use the short name
+                    fileDisplayName: fileDisplayName, // Usa o nome curto
                     pageNumber: pageNum,
                     pageIndex: pageNum - 1,
                     thumbnail: thumbnail
                 });
 
-                updatePageList(); // Update the thumbnails list
+                updatePageList(); // Atualiza a lista de miniaturas
             } catch (error) {
-                console.error(`Error processing page ${pageNum} of file ${file.name}:`, error);
-                alert(`Error processing page ${pageNum} of file ${file.name}. See console for details.`);
+                console.error(`Erro ao processar a página ${pageNum} do arquivo ${file.name}:`, error);
+                alert(`Erro ao processar a página ${pageNum} do arquivo ${file.name}. Veja o console para detalhes.`);
             }
         }
     } catch (error) {
-        console.error(`Error loading file ${file.name}:`, error);
-        alert(`Error loading file ${file.name}. See console for details.`);
+        console.error(`Erro ao carregar o arquivo ${file.name}:`, error);
+        alert(`Erro ao carregar o arquivo ${file.name}. Veja o console para detalhes.`);
     }
 }
 
-// Event when clicking the merge PDFs button
+// Evento ao clicar no botão de mesclar PDFs
 mergeBtn.addEventListener('click', async () => {
     if (pagesArray.length < 2) {
-        alert('Please add at least two pages to merge.'); // Check if there are enough pages
+        alert('Adicione pelo menos duas páginas para mesclar.'); // Verifica se há páginas suficientes
         return;
     }
 
-    mergeBtn.disabled = true; // Disable the button during merging
-    mergeBtn.textContent = 'Merging...'; // Change button text to indicate the process
-    downloadLink.style.display = 'none'; // Hide the download link
+    mergeBtn.disabled = true; // Desativa o botão durante a mesclagem
+    mergeBtn.textContent = 'Merging...'; // Altera o texto do botão para indicar o processo
+    downloadLink.style.display = 'none'; // Oculta o link de download
 
     try {
-        const mergedPdf = await PDFLib.PDFDocument.create(); // Create a new empty PDF document
+        const mergedPdf = await PDFLib.PDFDocument.create(); // Cria um novo documento PDF vazio
 
-        // Copy and add each page to the merged PDF
+        // Copia e adiciona cada página ao PDF mesclado
         for (const page of pagesArray) {
             let fileData = pdfFiles.get(page.fileId);
 
-            // Load the PDFLib document if not already loaded
+            // Carrega o documento PDFLib se ainda não estiver carregado
             if (!fileData.pdfDoc) {
                 fileData.pdfDoc = await PDFLib.PDFDocument.load(fileData.pdfBuffer.slice(0));
             }
 
-            const [copiedPage] = await mergedPdf.copyPages(fileData.pdfDoc, [page.pageIndex]); // Copy the page from the PDF
-            mergedPdf.addPage(copiedPage); // Add the page to the new PDF
+            const [copiedPage] = await mergedPdf.copyPages(fileData.pdfDoc, [page.pageIndex]); // Copia a página do PDF
+            mergedPdf.addPage(copiedPage); // Adiciona a página ao novo PDF
         }
 
-        const mergedPdfFile = await mergedPdf.save(); // Save the merged PDF as a byte array
-        const blob = new Blob([mergedPdfFile], { type: 'application/pdf' }); // Create a blob from the PDF
-        const url = URL.createObjectURL(blob); // Generate a URL for download
+        const mergedPdfFile = await mergedPdf.save(); // Salva o PDF mesclado como um array de bytes
+        const blob = new Blob([mergedPdfFile], { type: 'application/pdf' }); // Cria um blob a partir do PDF
+        const url = URL.createObjectURL(blob); // Gera uma URL para download
 
-        downloadLink.href = url; // Set the URL in the download link
-        downloadLink.style.display = 'block'; // Show the download link
+        downloadLink.href = url; // Define a URL no link de download
+        downloadLink.style.display = 'block'; // Exibe o link de download
     } catch (error) {
-        console.error('An error occurred while merging PDFs:', error);
-        alert(`An error occurred while merging PDFs: ${error.message}`);
+        console.error('Erro ao mesclar os PDFs:', error);
+        alert(`Erro ao mesclar os PDFs: ${error.message}`);
     } finally {
-        mergeBtn.disabled = false; // Re-enable the button after the process
-        mergeBtn.textContent = 'Merge PDFs'; // Restore the original button text
+        mergeBtn.disabled = false; // Reativa o botão após o processo
+        mergeBtn.textContent = 'Merge PDFs'; // Restaura o texto original do botão
     }
 });

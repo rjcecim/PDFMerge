@@ -2,68 +2,68 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box; /* Garante que o padding e a border sejam incluídos nas dimensões totais dos elementos */
 }
 
 /* Estilos globais para fonte e cores */
 html, body {
-    height: 100%; /* O corpo ocupará 100% da altura */
+    height: 100%; /* Faz o corpo ocupar 100% da altura da tela */
     font-family: 'Roboto', sans-serif; /* Define a fonte padrão como Roboto */
     background-color: #f0f0f0; /* Define uma cor de fundo clara */
-    color: #333; /* Cor de texto padrão */
+    color: #333; /* Define a cor padrão do texto */
 }
 
 /* Estilo para o cabeçalho */
 header {
-    background: linear-gradient(135deg, rgba(0, 51, 153, 0.85), rgba(209, 44, 47, 0.85)); /* Gradiente azul e vermelho */
-    color: #fff; /* Texto branco */
+    background: linear-gradient(135deg, rgba(0, 51, 153, 0.85), rgba(209, 44, 47, 0.85)); /* Gradiente azul e vermelho no fundo do cabeçalho */
+    color: #fff; /* Texto na cor branca */
     padding: 20px; /* Espaçamento interno */
-    display: flex; /* Exibe elementos em linha */
-    justify-content: center; /* Centraliza horizontalmente */
-    align-items: center; /* Centraliza verticalmente */
-    position: relative; /* Para posicionamento absoluto da logo */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra no cabeçalho */
+    display: flex; /* Exibe os elementos do cabeçalho em linha */
+    justify-content: center; /* Centraliza horizontalmente o conteúdo do cabeçalho */
+    align-items: center; /* Centraliza verticalmente os itens do cabeçalho */
+    position: relative; /* Define a posição relativa para facilitar o posicionamento da logo */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Adiciona uma leve sombra ao cabeçalho */
 }
 
 /* Estilo para a logo à esquerda do cabeçalho */
 .logo {
-    position: absolute; /* Posiciona a logo de forma absoluta */
-    left: 20px; /* Espaçamento da borda esquerda */
-    height: 200px; /* Altura da logo */
+    position: absolute; /* Posicionamento absoluto para ajustar a logo no cabeçalho */
+    left: 20px; /* Define o espaço à esquerda da logo */
+    height: 200px; /* Define a altura da logo */
 }
 
 /* Estilo para o título do cabeçalho */
 header h1 {
-    font-size: 2.5em; /* Tamanho grande para o título */
-    font-family: 'Poppins', sans-serif; /* Fonte Poppins */
-    font-weight: 600; /* Peso da fonte */
-    text-align: center;
+    font-size: 2.5em; /* Define um tamanho grande para o título */
+    font-family: 'Poppins', sans-serif; /* Aplica a fonte Poppins ao título */
+    font-weight: 600; /* Peso da fonte para o título */
+    text-align: center; /* Alinha o texto ao centro */
 }
 
 /* Estilos principais para o corpo */
 main {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centraliza o conteúdo */
-    padding: 40px; /* Espaçamento interno */
+    align-items: center; /* Centraliza o conteúdo no centro da página */
+    padding: 40px; /* Define espaçamento interno para a seção principal */
 }
 
 /* Estilo da área de upload */
 .upload-section {
     border: 2px dashed #d12c2f; /* Borda tracejada em vermelho */
     padding: 60px;
-    text-align: center;
-    border-radius: 12px;
+    text-align: center; /* Centraliza o texto */
+    border-radius: 12px; /* Bordas arredondadas */
     margin: 20px;
-    background-color: #fff;
-    transition: background-color 0.3s ease, transform 0.3s ease; /* Transições suaves */
+    background-color: #fff; /* Fundo branco */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transições suaves para mudanças de cor e tamanho */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Sombra suave */
-    cursor: pointer; /* Cursor de ponteiro */
+    cursor: pointer; /* Cursor de ponteiro ao passar sobre a área */
 }
 
 /* Estilo ao arrastar arquivos sobre a área de upload */
 .upload-section.dragover {
-    background-color: #003399; /* Cor de fundo ao arrastar */
+    background-color: #003399; /* Altera a cor de fundo ao arrastar arquivos */
     transform: scale(1.05); /* Aumenta levemente o tamanho */
 }
 
@@ -75,67 +75,67 @@ main {
 /* Estilo do texto do label */
 .upload-section label {
     font-family: 'Poppins', sans-serif;
-    font-size: 18px;
-    color: #003399; /* Cor azul escuro */
-    font-weight: 500;
+    font-size: 18px; /* Define o tamanho da fonte do label */
+    color: #003399; /* Aplica cor azul escura ao texto */
+    font-weight: 500; /* Define o peso da fonte */
 }
 
 /* Estilo para a lista de miniaturas das páginas dos PDFs */
 .page-list {
-    display: grid; /* Exibe itens em grade */
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Ajusta o layout das colunas */
-    gap: 20px; /* Espaçamento entre itens */
+    display: grid; /* Define um layout de grade para os itens */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Ajusta o layout das colunas automaticamente */
+    gap: 20px; /* Espaçamento entre os itens */
     margin: 20px 0;
     padding: 10px;
-    width: 100%;
+    width: 100%; /* Define a largura completa para a lista */
     background-color: #fff;
     border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    overflow-y: auto; /* Adiciona rolagem vertical */
-    max-height: 60vh; /* Define altura máxima */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Sombra leve */
+    overflow-y: auto; /* Permite rolagem vertical quando necessário */
+    max-height: 60vh; /* Define uma altura máxima para a lista */
 }
 
 /* Estilo para os itens de página (miniaturas) */
 .page-item {
     position: relative;
     width: 150px;
-    height: calc(150px * 1.414); /* Proporção de folha A4 */
+    height: calc(150px * 1.414); /* Define a proporção de uma folha A4 */
     border-radius: 8px;
-    background-color: #f1f5f9;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Sombra suave */
+    background-color: #f1f5f9; /* Cor de fundo clara para os itens */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Sombra leve */
     transition: transform 0.2s ease;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; /* Centraliza o conteúdo dentro do item */
     padding-bottom: 10px;
 }
 
 /* Efeito de hover para os itens de página */
 .page-item:hover {
-    transform: translateY(-5px); /* Move levemente para cima */
+    transform: translateY(-5px); /* Move levemente o item para cima no hover */
 }
 
 /* Estilo da imagem (miniatura da página) */
 .page-item img {
-    width: 100%;
-    height: 80%;
+    width: 100%; /* A imagem ocupará 100% da largura do contêiner */
+    height: 80%; /* Define a altura da imagem */
     object-fit: contain; /* Mantém a proporção da imagem */
-    border-radius: 8px;
+    border-radius: 8px; /* Bordas arredondadas para a imagem */
 }
 
 /* Estilo para o texto de informação das páginas */
 .page-info {
     margin-top: 5px;
     font-size: 14px;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif; /* Aplica a fonte Roboto */
     text-align: center;
-    color: #555;
+    color: #555; /* Cor cinza para o texto */
     padding: 0 5px;
-    height: 20%;
-    overflow: hidden; /* Oculta o excesso de texto */
+    height: 20%; /* Altura reservada para o texto */
+    overflow: hidden; /* Oculta o texto que ultrapassar a área disponível */
     word-wrap: break-word;
-    text-overflow: ellipsis; /* Adiciona reticências ao final do texto */
-    white-space: nowrap; /* Impede que o texto quebre em várias linhas */
+    text-overflow: ellipsis; /* Adiciona reticências no final do texto excedente */
+    white-space: nowrap; /* Evita quebra de linha no texto */
 }
 
 /* Estilo do botão de remover página */
@@ -143,13 +143,13 @@ main {
     position: absolute;
     top: 10px;
     right: 10px;
-    background-color: #d12c2f; /* Vermelho padrão */
-    color: #fff;
+    background-color: #d12c2f; /* Fundo vermelho */
+    color: #fff; /* Texto branco */
     border: none;
-    border-radius: 50%;
+    border-radius: 50%; /* Botão redondo */
     cursor: pointer;
     padding: 5px 10px;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease; /* Transição suave de cor de fundo */
 }
 
 /* Estilo de hover no botão de remover */
@@ -161,7 +161,7 @@ main {
 .actions {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; /* Centraliza o conteúdo */
     margin-top: 30px;
 }
 
@@ -169,14 +169,14 @@ main {
 #merge-btn {
     padding: 15px 40px;
     background: linear-gradient(135deg, #003399, #d12c2f); /* Gradiente azul e vermelho */
-    color: #fff;
+    color: #fff; /* Texto branco */
     border: none;
-    border-radius: 8px;
+    border-radius: 8px; /* Bordas arredondadas */
     font-family: 'Poppins', sans-serif;
     font-size: 16px;
     font-weight: 500;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: background 0.3s ease; /* Transição suave no hover */
     margin-bottom: 20px;
 }
 
@@ -235,7 +235,7 @@ main {
 
 /* Estilos para o modal */
 .modal {
-    display: none; /* Inicialmente oculto */
+    display: none; /* Modal oculto inicialmente */
     position: fixed;
     z-index: 1000; /* Fica acima de outros elementos */
     left: 0;
@@ -245,11 +245,11 @@ main {
     overflow: auto; /* Adiciona rolagem se necessário */
     background-color: rgba(0, 0, 0, 0.8); /* Fundo semi-transparente */
     justify-content: center;
-    align-items: center;
+    align-items: center; /* Centraliza o conteúdo */
 }
 
 .modal.open {
-    display: flex; /* Exibe o modal com flexbox */
+    display: flex; /* Exibe o modal quando ativo */
 }
 
 /* Botão de fechar no modal */
@@ -261,7 +261,7 @@ main {
     font-size: 40px;
     font-weight: bold;
     cursor: pointer;
-    z-index: 1001;
+    z-index: 1001; /* Sobrepõe outros elementos no modal */
 }
 
 /* Canvas dentro do modal */
@@ -270,7 +270,7 @@ main {
     max-height: 90%;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     background-color: #fff;
-    border-radius: 8px;
+    border-radius: 8px; /* Bordas arredondadas para o canvas */
 }
 
 /* Responsividade para dispositivos móveis */
