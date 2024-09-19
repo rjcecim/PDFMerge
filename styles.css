@@ -2,199 +2,234 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /* Garante que o padding e a border sejam incluídos nas dimensões totais dos elementos */
+    box-sizing: border-box;
 }
 
 /* Estilos globais para fonte e cores */
 html, body {
-    height: 100%; /* Faz o corpo ocupar 100% da altura da tela */
-    font-family: 'Roboto', sans-serif; /* Define a fonte padrão como Roboto */
-    background-color: #f0f0f0; /* Define uma cor de fundo clara */
-    color: #333; /* Define a cor padrão do texto */
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
 }
 
 /* Estilo para o cabeçalho */
 header {
-    background: linear-gradient(135deg, rgba(0, 51, 153, 0.85), rgba(209, 44, 47, 0.85)); /* Gradiente azul e vermelho no fundo do cabeçalho */
-    color: #fff; /* Texto na cor branca */
-    padding: 20px; /* Espaçamento interno */
-    display: flex; /* Exibe os elementos do cabeçalho em linha */
-    justify-content: center; /* Centraliza horizontalmente o conteúdo do cabeçalho */
-    align-items: center; /* Centraliza verticalmente os itens do cabeçalho */
-    position: relative; /* Define a posição relativa para facilitar o posicionamento da logo */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Adiciona uma leve sombra ao cabeçalho */
+    background: linear-gradient(135deg, rgba(0, 51, 153, 0.85), rgba(209, 44, 47, 0.85));
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilo para a logo à esquerda do cabeçalho */
 .logo {
-    position: absolute; /* Posicionamento absoluto para ajustar a logo no cabeçalho */
-    left: 20px; /* Define o espaço à esquerda da logo */
-    height: 200px; /* Define a altura da logo */
+    position: absolute;
+    left: 20px;
+    height: 120px; /* Ajustado para melhor responsividade */
 }
 
-/* Estilo para o título do cabeçalho */
 header h1 {
-    font-size: 2.5em; /* Define um tamanho grande para o título */
-    font-family: 'Poppins', sans-serif; /* Aplica a fonte Poppins ao título */
-    font-weight: 600; /* Peso da fonte para o título */
-    text-align: center; /* Alinha o texto ao centro */
+    font-size: 2.5em;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    text-align: center;
 }
 
-/* Estilos principais para o corpo */
+/* Estilo principal */
 main {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centraliza o conteúdo no centro da página */
-    padding: 40px; /* Define espaçamento interno para a seção principal */
+    align-items: center;
+    padding: 40px;
 }
 
-/* Estilo da área de upload */
+/* Seção de upload */
 .upload-section {
-    border: 2px dashed #d12c2f; /* Borda tracejada em vermelho */
+    border: 2px dashed #d12c2f;
     padding: 60px;
-    text-align: center; /* Centraliza o texto */
-    border-radius: 12px; /* Bordas arredondadas */
+    text-align: center;
+    border-radius: 12px;
     margin: 20px;
-    background-color: #fff; /* Fundo branco */
-    transition: background-color 0.3s ease, transform 0.3s ease; /* Transições suaves para mudanças de cor e tamanho */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Sombra suave */
-    cursor: pointer; /* Cursor de ponteiro ao passar sobre a área */
+    background-color: #fff;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    position: relative;
 }
 
-/* Estilo ao arrastar arquivos sobre a área de upload */
 .upload-section.dragover {
-    background-color: #003399; /* Altera a cor de fundo ao arrastar arquivos */
-    transform: scale(1.05); /* Aumenta levemente o tamanho */
+    background-color: #003399;
+    transform: scale(1.05);
 }
 
-/* Oculta o input de arquivo */
 .upload-section input {
     display: none;
 }
 
-/* Estilo do texto do label */
 .upload-section label {
-    font-family: 'Poppins', sans-serif;
-    font-size: 18px; /* Define o tamanho da fonte do label */
-    color: #003399; /* Aplica cor azul escura ao texto */
-    font-weight: 500; /* Define o peso da fonte */
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    color: #003399;
+    font-weight: 600;
 }
 
-/* Estilo para a lista de miniaturas das páginas dos PDFs */
+/* Lista de páginas */
 .page-list {
-    display: grid; /* Define um layout de grade para os itens */
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Ajusta o layout das colunas automaticamente */
-    gap: 20px; /* Espaçamento entre os itens */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
     margin: 20px 0;
     padding: 10px;
-    width: 100%; /* Define a largura completa para a lista */
+    width: 100%;
+    /* Removido max-width para permitir ajuste completo */
     background-color: #fff;
     border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Sombra leve */
-    overflow-y: auto; /* Permite rolagem vertical quando necessário */
-    max-height: 60vh; /* Define uma altura máxima para a lista */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    overflow-y: auto;
+    max-height: 60vh;
 }
 
-/* Estilo para os itens de página (miniaturas) */
+/* Item de página */
 .page-item {
     position: relative;
-    width: 150px;
-    height: calc(150px * 1.414); /* Define a proporção de uma folha A4 */
+    width: 100%; /* Ajustado para preencher o grid */
+    background-color: #f1f5f9;
     border-radius: 8px;
-    background-color: #f1f5f9; /* Cor de fundo clara para os itens */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Sombra leve */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     transition: transform 0.2s ease;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centraliza o conteúdo dentro do item */
-    padding-bottom: 10px;
+    align-items: center;
+    padding: 10px;
 }
 
-/* Efeito de hover para os itens de página */
 .page-item:hover {
-    transform: translateY(-5px); /* Move levemente o item para cima no hover */
+    transform: translateY(-5px);
 }
 
-/* Estilo da imagem (miniatura da página) */
-.page-item img {
-    width: 100%; /* A imagem ocupará 100% da largura do contêiner */
-    height: 80%; /* Define a altura da imagem */
-    object-fit: contain; /* Mantém a proporção da imagem */
-    border-radius: 8px; /* Bordas arredondadas para a imagem */
+/* Container da miniatura */
+.thumbnail-container {
+    position: relative;
+    width: 100%;
+    /* Ajustado a altura para permitir rotação sem corte */
+    padding-top: 141.4%; /* Proporção 1:√2 para PDF */
+    overflow: visible; /* Alterado para evitar corte */
+    border-radius: 8px;
 }
 
-/* Estilo para o texto de informação das páginas */
-.page-info {
-    margin-top: 5px;
-    font-size: 14px;
-    font-family: 'Roboto', sans-serif; /* Aplica a fonte Roboto */
-    text-align: center;
-    color: #555; /* Cor cinza para o texto */
-    padding: 0 5px;
-    height: 20%; /* Altura reservada para o texto */
-    overflow: hidden; /* Oculta o texto que ultrapassar a área disponível */
-    word-wrap: break-word;
-    text-overflow: ellipsis; /* Adiciona reticências no final do texto excedente */
-    white-space: nowrap; /* Evita quebra de linha no texto */
+.page-thumbnail {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
 }
 
-/* Estilo do botão de remover página */
-.remove-btn {
+/* Sobreposição de botões */
+.overlay-buttons {
     position: absolute;
     top: 10px;
     right: 10px;
-    background-color: #d12c2f; /* Fundo vermelho */
-    color: #fff; /* Texto branco */
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.thumbnail-container:hover .overlay-buttons {
+    opacity: 1;
+}
+
+/* Botões de controle */
+.remove-btn,
+.rotate-btn {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
     border: none;
-    border-radius: 50%; /* Botão redondo */
+    border-radius: 4px;
     cursor: pointer;
-    padding: 5px 10px;
-    transition: background-color 0.2s ease; /* Transição suave de cor de fundo */
+    padding: 5px 8px;
+    font-size: 14px;
+    transition: background-color 0.2s ease;
 }
 
-/* Estilo de hover no botão de remover */
+.rotate-left {
+    background-color: rgba(0, 51, 153, 0.8);
+}
+
+.rotate-right {
+    background-color: rgba(209, 44, 47, 0.8);
+}
+
 .remove-btn:hover {
-    background-color: #a32025; /* Vermelho mais escuro no hover */
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
-/* Seção de ações com botão de mesclar PDFs */
+.rotate-btn:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Informações da página */
+.page-info {
+    margin-top: 10px;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    color: #555;
+    padding: 0 5px;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+.file-name {
+    font-weight: 600;
+}
+
+.page-number {
+    font-weight: 400;
+}
+
+/* Seção de ações */
 .actions {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centraliza o conteúdo */
+    align-items: center;
     margin-top: 30px;
 }
 
-/* Estilo do botão de mesclar PDFs */
 #merge-btn {
     padding: 15px 40px;
-    background: linear-gradient(135deg, #003399, #d12c2f); /* Gradiente azul e vermelho */
-    color: #fff; /* Texto branco */
+    background: linear-gradient(135deg, #003399, #d12c2f);
+    color: #fff;
     border: none;
-    border-radius: 8px; /* Bordas arredondadas */
-    font-family: 'Poppins', sans-serif;
+    border-radius: 8px;
+    font-family: 'Open Sans', sans-serif;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
-    transition: background 0.3s ease; /* Transição suave no hover */
+    transition: background 0.3s ease;
     margin-bottom: 20px;
 }
 
-/* Efeito de hover no botão de mesclar */
 #merge-btn:hover {
-    background: linear-gradient(135deg, #00247d, #a32025); /* Gradiente mais escuro */
+    background: linear-gradient(135deg, #00247d, #a32025);
 }
 
-/* Estilo para o link de download */
 #download-link {
     font-size: 18px;
-    color: #003399; /* Azul escuro */
+    color: #003399;
     text-decoration: none;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     margin-top: 10px;
 }
 
-/* Responsividade para tablets */
 @media (max-width: 768px) {
     .upload-section {
         padding: 40px;
@@ -210,18 +245,21 @@ main {
     }
 }
 
-/* Responsividade para dispositivos móveis */
 @media (max-width: 480px) {
     .upload-section {
         padding: 30px;
     }
 
     .page-list {
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     }
 
-    .page-item img {
-        height: 150px;
+    .thumbnail-container {
+        padding-top: 141.4%; /* Mantém proporção */
+    }
+
+    .page-thumbnail {
+        height: 100%;
     }
 
     #merge-btn {
@@ -233,26 +271,25 @@ main {
     }
 }
 
-/* Estilos para o modal */
+/* Modal */
 .modal {
-    display: none; /* Modal oculto inicialmente */
+    display: none;
     position: fixed;
-    z-index: 1000; /* Fica acima de outros elementos */
+    z-index: 1000;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto; /* Adiciona rolagem se necessário */
-    background-color: rgba(0, 0, 0, 0.8); /* Fundo semi-transparente */
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
     justify-content: center;
-    align-items: center; /* Centraliza o conteúdo */
+    align-items: center;
 }
 
 .modal.open {
-    display: flex; /* Exibe o modal quando ativo */
+    display: flex;
 }
 
-/* Botão de fechar no modal */
 .close-btn {
     position: absolute;
     top: 20px;
@@ -261,19 +298,17 @@ main {
     font-size: 40px;
     font-weight: bold;
     cursor: pointer;
-    z-index: 1001; /* Sobrepõe outros elementos no modal */
+    z-index: 1001;
 }
 
-/* Canvas dentro do modal */
 #modal-canvas {
     max-width: 90%;
     max-height: 90%;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     background-color: #fff;
-    border-radius: 8px; /* Bordas arredondadas para o canvas */
+    border-radius: 8px;
 }
 
-/* Responsividade para dispositivos móveis */
 @media (max-width: 480px) {
     .close-btn {
         font-size: 30px;
